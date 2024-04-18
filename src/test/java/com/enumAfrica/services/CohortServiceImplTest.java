@@ -37,6 +37,9 @@ public class CohortServiceImplTest {
         createCohortRequest.setDescription("Cohort 17");
         createCohortRequest.setAvatar("yikkhgfddd");
         createCohortRequest.setProgramType("Java");
+        createCohortRequest.setStartDate("11-04-2023");
+        createCohortRequest.setEndDate("11-04-2024");
+
 
         CreatedCohortResponse response = cohortService.createCohort(createCohortRequest);
         System.out.println(response.getCohort().getAvatar());
@@ -51,6 +54,8 @@ public class CohortServiceImplTest {
         createCohortRequest.setDescription("Cohort 17");
         createCohortRequest.setAvatar("photo");
         createCohortRequest.setProgramType("Java");
+        createCohortRequest.setStartDate("11-04-2023");
+        createCohortRequest.setEndDate("11-04-2024");
 
         CreatedCohortResponse response = cohortService.createCohort(createCohortRequest);
         System.out.println(response.getCohort().getAvatar());
@@ -66,6 +71,8 @@ public class CohortServiceImplTest {
         createCohortRequest.setDescription("Cohort 17");
         createCohortRequest.setAvatar("photo");
         createCohortRequest.setProgramType("Java");
+        createCohortRequest.setStartDate("11-04-2023");
+        createCohortRequest.setEndDate("11-04-2024");
 
         CreatedCohortResponse response = cohortService.createCohort(createCohortRequest);
         System.out.println(response.getCohort().getAvatar());
@@ -76,6 +83,8 @@ public class CohortServiceImplTest {
         createCohortRequest2.setDescription("Cohort 15");
         createCohortRequest2.setAvatar("photo");
         createCohortRequest2.setProgramType("Java");
+        createCohortRequest.setStartDate("11-04-2023");
+        createCohortRequest.setEndDate("11-04-2024");
 
         CreatedCohortResponse response2 = cohortService.createCohort(createCohortRequest2);
         System.out.println(response2.getCohort().getAvatar());

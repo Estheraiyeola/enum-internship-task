@@ -18,7 +18,8 @@ public class Mapper {
         newCohort.setAvatar(createCohortRequest.getAvatar());
         newCohort.setDescription(createCohortRequest.getDescription());
         newCohort.setName(createCohortRequest.getName());
-        newCohort.setStartDate(LocalDate.now());
+        newCohort.setStartDate(createCohortRequest.getStartDate());
+        newCohort.setEndDate(createCohortRequest.getEndDate());
         newCohort.setProgramType(createCohortRequest.getProgramType());
         return newCohort;
     }

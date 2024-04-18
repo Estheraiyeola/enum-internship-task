@@ -19,7 +19,7 @@ public class Cohort {
     private String name;
     private String description;
     private String programType;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private String avatar;
 }
