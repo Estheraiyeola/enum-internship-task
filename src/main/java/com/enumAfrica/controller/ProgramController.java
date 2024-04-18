@@ -43,13 +43,13 @@ public class ProgramController {
     }
 
     @GetMapping("/get-all")
-    public ResponseEntity<?> getAllCohorts(@RequestHeader("Authorization") String accessToken){
+    public ResponseEntity<?> getAllPrograms(@RequestHeader("Authorization") String accessToken){
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
             if (decodedToken.get(1).equals("ADMIN")){
                 List<ProgramType> response = programTypeService.getAllProgramType();
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -58,13 +58,13 @@ public class ProgramController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<?> getCohort(@RequestParam String programName, @RequestHeader("Authorization") String accessToken){
+    public ResponseEntity<?> getProgram(@RequestParam String programName, @RequestHeader("Authorization") String accessToken){
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
             if (decodedToken.get(1).equals("ADMIN")){
                 ProgramType response = programTypeService.getAProgramType(programName);
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

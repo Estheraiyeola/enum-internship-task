@@ -55,7 +55,7 @@ public class CohortController {
             List<String> decodedToken = userService.verifyToken(token[1]);
             if (decodedToken.get(1).equals("ADMIN")){
                 List<Cohort> response = cohortService.getAllCohorts();
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class CohortController {
             List<String> decodedToken = userService.verifyToken(token[1]);
             if (decodedToken.get(1).equals("ADMIN")){
                 Cohort response = cohortService.getCohort(cohortName);
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
+                return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
