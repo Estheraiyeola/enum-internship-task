@@ -1,6 +1,7 @@
 package com.enumAfrica.services;
 
 import com.enumAfrica.data.model.User;
+import com.enumAfrica.dto.request.CreateOrganizationRequest;
 import com.enumAfrica.exception.AdminNotFoundException;
 import jakarta.persistence.Access;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,12 @@ public class AdminServiceTest {
     public void testThatExistsByDefault() throws AdminNotFoundException {
         User foundAdmin = adminService.findAdminByFirstName("admin");
         assertNotNull(foundAdmin);
+    }
+    @Test
+    public void testThatAdminCanCreateOrganizations() {
+        CreateOrganizationRequest createOrganizationRequest = new CreateOrganizationRequest();
+        createOrganizationRequest.setName("");
+        CreateOrganizationResponse response =  adminService.createOrganization(createOrganizationRequest);
     }
 
 

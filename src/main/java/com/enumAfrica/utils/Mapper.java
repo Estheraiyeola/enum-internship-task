@@ -1,8 +1,10 @@
 package com.enumAfrica.utils;
 
 import com.enumAfrica.data.model.Cohort;
+import com.enumAfrica.data.model.Course;
 import com.enumAfrica.data.model.User;
 import com.enumAfrica.dto.request.CreateCohortRequest;
+import com.enumAfrica.dto.request.CreateCourseRequest;
 import com.enumAfrica.dto.request.CreateUserRequest;
 import com.enumAfrica.dto.response.CreatedCohortResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -44,6 +46,11 @@ public class Mapper {
     private static String getEncryptedPassword(CreateUserRequest request) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(request.getPassword());
+    }
+    public Course map(CreateCourseRequest createCourseRequest) {
+        Course course = new Course();
+        course.setName(createCourseRequest.getName());
+        return course;
     }
 
 }

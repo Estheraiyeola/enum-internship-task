@@ -37,6 +37,18 @@ class UserServiceTest {
         assertThat(createdUserResponse.getUser().getFirstName(), is("Esther"));
     }
     @Test
+    public void testThatInstructorsCanRegister() throws UserAlreadyExistsException {
+        CreateUserRequest createUserRequest = new CreateUserRequest();
+        createUserRequest.setFirstName("Tomide");
+        createUserRequest.setLastName("Muliyu");
+        createUserRequest.setEmail("tomide@gmail.com");
+        createUserRequest.setPassword("password");
+        createUserRequest.setRole(Role.INSTRUCTOR);
+
+        CreatedUserResponse createdUserResponse = userService.createUser(createUserRequest);
+        assertThat(createdUserResponse.getUser().getFirstName(), is("Tomide"));
+    }
+    @Test
     public void testThatUniqueUsersAreCreated() throws UserAlreadyExistsException {
         CreateUserRequest createUserRequest = new CreateUserRequest();
         createUserRequest.setFirstName("Esther");
@@ -69,5 +81,6 @@ class UserServiceTest {
         AuthenticatedUserResponse response = userService.authenticateUser(authenticateUserRequest);
         assertThat(response.getMessage(), is("Successfully Authenticated"));
     }
+
 
 }
