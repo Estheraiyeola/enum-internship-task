@@ -269,13 +269,13 @@ public class CohortServiceImplTest {
         assertThat(invitedInstructorResponse.getMessage(), is("Invite successfully sent"));
 
         AcceptInviteRequest acceptInviteRequest = new AcceptInviteRequest();
-        acceptInviteRequest.setInstructor(List.of((Instructor)createdUserResponse.getUser()));
+        acceptInviteRequest.setInstructor((Instructor)createdUserResponse.getUser());
         acceptInviteRequest.setCohortId(cohortId);
 
 
         AcceptedInstructorInviteResponse acceptedInstructorInviteResponse = cohortService.acceptInstructorInvite(acceptInviteRequest);
         assertThat(acceptedInstructorInviteResponse.getMessage(), is("Congrats!!!, you're now an instructor"));
-        assertThat(acceptedInstructorInviteResponse.getInstructor().get(0).getEmail(), is("tomide@gmail.com"));
+        assertThat(acceptedInstructorInviteResponse.getInstructor().getEmail(), is("tomide@gmail.com"));
 
     }
 
@@ -335,13 +335,13 @@ public class CohortServiceImplTest {
         assertThat(invitedInstructorResponse.getMessage(), is("Invite successfully sent"));
 
         AcceptInviteRequest acceptInviteRequest = new AcceptInviteRequest();
-        acceptInviteRequest.setInstructor(List.of((Instructor)createdUserResponse.getUser()));
+        acceptInviteRequest.setInstructor((Instructor)createdUserResponse.getUser());
         acceptInviteRequest.setCohortId(cohortId);
 
 
         AcceptedInstructorInviteResponse acceptedInstructorInviteResponse = cohortService.acceptInstructorInvite(acceptInviteRequest);
         assertThat(acceptedInstructorInviteResponse.getMessage(), is("Congrats!!!, you're now an instructor"));
-        assertThat(acceptedInstructorInviteResponse.getInstructor().get(0).getEmail(), is("tomide@gmail.com"));
+        assertThat(acceptedInstructorInviteResponse.getInstructor().getEmail(), is("tomide@gmail.com"));
 
         RemoveInstructorRequest removeInstructorRequest = new RemoveInstructorRequest();
         removeInstructorRequest.setInstructorId(createdUserResponse.getUser().getId());
@@ -516,13 +516,13 @@ public class CohortServiceImplTest {
         assertThat(invitedLearnerResponse.getMessage(), is("Invite successfully sent"));
 
         AcceptLearnerInviteRequest acceptInviteRequest = new AcceptLearnerInviteRequest();
-        acceptInviteRequest.setLearner(List.of((Learner) createdUserResponse.getUser()));
+        acceptInviteRequest.setLearner((Learner) createdUserResponse.getUser());
         acceptInviteRequest.setCohortId(response.getCohort().getId());
 
 
         AcceptedLearnerInviteResponse acceptedLearnerInviteResponse = cohortService.acceptLearnerInvite(acceptInviteRequest);
         assertThat(acceptedLearnerInviteResponse.getMessage(), is("Learner added"));
-        assertThat(acceptedLearnerInviteResponse.getLearners().get(0).getEmail(), is("ashley@gmail.com"));
+        assertThat(acceptedLearnerInviteResponse.getLearners().getEmail(), is("ashley@gmail.com"));
 
 
     }

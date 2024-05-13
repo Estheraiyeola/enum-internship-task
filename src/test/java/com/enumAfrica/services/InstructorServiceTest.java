@@ -110,13 +110,13 @@ public class InstructorServiceTest {
         assertThat(invitedInstructorResponse.getMessage(), is("Invite successfully sent"));
 
         AcceptInviteRequest acceptInviteRequest = new AcceptInviteRequest();
-        acceptInviteRequest.setInstructor(List.of((Instructor)createdUserResponse.getUser()));
+        acceptInviteRequest.setInstructor((Instructor)createdUserResponse.getUser());
         acceptInviteRequest.setCohortId(createdCohortResponse.getCohort().getId());
 
 
         AcceptedInstructorInviteResponse acceptedInstructorInviteResponse = cohortService.acceptInstructorInvite(acceptInviteRequest);
         assertThat(acceptedInstructorInviteResponse.getMessage(), is("Congrats!!!, you're now an instructor"));
-        assertThat(acceptedInstructorInviteResponse.getInstructor().get(0).getEmail(), is("tomide@gmail.com"));
+        assertThat(acceptedInstructorInviteResponse.getInstructor().getEmail(), is("tomide@gmail.com"));
 
         AssignCourseToInstructorRequest assignCourseToInstructorRequest = new AssignCourseToInstructorRequest();
         assignCourseToInstructorRequest.setCourseId(createdCourseResponse.getCourse().getId());
