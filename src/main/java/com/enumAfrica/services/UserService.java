@@ -14,7 +14,6 @@ import java.util.List;
 public interface UserService {
     CreatedUserResponse createUser(CreateUserRequest createUserRequest) throws UserAlreadyExistsException;
 
-    void deleteAll();
 
     User findByFirstName(String admin);
 
@@ -25,4 +24,8 @@ public interface UserService {
     List<String> verifyToken(String accessToken) throws JWTDecodeException;
 
     User findById(Long instructorId);
+
+    List<User> findAll();
+
+    void delete(User user);
 }

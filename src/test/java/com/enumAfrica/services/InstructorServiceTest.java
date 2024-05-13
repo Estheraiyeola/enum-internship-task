@@ -31,10 +31,12 @@ public class InstructorServiceTest {
     private ProgramTypeService programTypeService;
     @Autowired
     private CohortService cohortService;
+    @Autowired
+    private CohortUserService cohortUserService;
 
     @BeforeEach
     public void setInstructorService(){
-        userService.deleteAll();
+        cohortUserService.deleteAll();
         organizationService.deleteAll();
         courseService.deleteAll();
         programTypeService.deleteAll();

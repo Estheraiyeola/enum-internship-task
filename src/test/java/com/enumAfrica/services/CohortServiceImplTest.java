@@ -30,9 +30,10 @@ public class CohortServiceImplTest {
     private OrganizationService organizationService;
     @Autowired
     private CourseService courseService;
+
     @BeforeEach
     public void setCohortService(){
-        userService.deleteAll();
+        cohortUserService.deleteAll();
         programTypeService.deleteAll();
         cohortService.deleteAll();
         organizationService.deleteAll();

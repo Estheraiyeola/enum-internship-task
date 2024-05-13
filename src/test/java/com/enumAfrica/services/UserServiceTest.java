@@ -20,9 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UserServiceTest {
     @Autowired
     private UserService userService;
+    @Autowired
+    private CohortUserService cohortUserService;
     @BeforeEach
     public void setUserService(){
-        userService.deleteAll();
+        cohortUserService.deleteAll();
     }
     @Test
     public void testThatUserCanBeCreated() throws UserAlreadyExistsException {

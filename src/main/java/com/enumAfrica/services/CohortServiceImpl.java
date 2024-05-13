@@ -24,7 +24,6 @@ public class CohortServiceImpl implements CohortService{
     private final Mapper mapper;
     private final MailService mailService;
     private final CourseService courseService;
-    private final CohortUserService cohortUserService;
 
     @Override
     public CreatedCohortResponse createCohort(CreateCohortRequest createCohortRequest) throws CohortAlreadyExistsException, IOException, ProgramTypeDoesNotExistException {
@@ -231,10 +230,7 @@ public class CohortServiceImpl implements CohortService{
         return instructors;
     }
 
-    @Override
-    public RemovedInstructorResponse removeInstructor(RemoveInstructorRequest request) throws CohortNotFoundException, UserWithThisCredentialsDoesNotExistException {
-        return cohortUserService.removeInstructorFromCohort(request);
-    }
+
 
 
 }

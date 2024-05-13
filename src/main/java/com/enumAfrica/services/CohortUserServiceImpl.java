@@ -36,4 +36,17 @@ public class CohortUserServiceImpl implements CohortUserService{
 
         throw new UserWithThisCredentialsDoesNotExistException("User Doesn't Exist");
     }
+
+    @Override
+    public void deleteUser(User user) {
+        cohortService.deleteUser(user);
+    }
+    @Override
+    @Transactional
+    public void deleteAll() {
+        for (User user:userService.findAll()) {
+            deleteUser(user);
+            userService.delete(user);
+        }
+    }
 }

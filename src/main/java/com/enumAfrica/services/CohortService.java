@@ -45,5 +45,4 @@ public interface CohortService {
 
     List<Instructor> getAllInstructorsIn_A_Cohort(Long cohortId) throws CohortNotFoundException;
 
-    RemovedInstructorResponse removeInstructor(RemoveInstructorRequest request) throws CohortNotFoundException, UserWithThisCredentialsDoesNotExistException;
 }

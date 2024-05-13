@@ -16,6 +16,7 @@ import com.enumAfrica.exception.CourseNotFoundException;
 import com.enumAfrica.exception.OrganizationDoesNotExistException;
 import com.enumAfrica.exception.UserWithThisCredentialsDoesNotExistException;
 import com.enumAfrica.services.CohortService;
+import com.enumAfrica.services.CohortUserService;
 import com.enumAfrica.services.InstructorService;
 import com.enumAfrica.services.UserService;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class InstructorController {
     private final CohortService cohortService;
     private final UserService userService;
     private final InstructorService instructorService;
+    private final CohortUserService cohortUserService;
     @PostMapping("/invite")
     public ResponseEntity<?> inviteInstructor(@RequestBody InviteInstructorRequest inviteInstructorRequest, @RequestHeader("Authorization") String accessToken){
         String[] token = accessToken.split(" ");
@@ -64,7 +66,7 @@ public class InstructorController {
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
             if (decodedToken.get(1).equals("ADMIN")){
-                RemovedInstructorResponse response = cohortService.removeInstructor(removeInstructorRequest);
+                RemovedInstructorResponse response = cohortUserService.removeInstructorFromCohort(removeInstructorRequest);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

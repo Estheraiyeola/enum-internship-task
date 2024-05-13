@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.enumAfrica.data.model.Cohort;
+import com.enumAfrica.data.model.Course;
 import com.enumAfrica.data.model.Organization;
 import com.enumAfrica.data.repository.OrganizationRepository;
 import com.enumAfrica.dto.request.AuthenticateOrganizationRequest;
@@ -32,6 +33,7 @@ public class OrganizationServiceImpl implements OrganizationService{
     private final Mapper mapper;
     private final OrganizationRepository organizationRepository;
     private final CohortService cohortService;
+    private final CourseService courseService;
     @Override
     public RegisteredOrganizationResponse registerOrganization(RegisterOrganizationRequest registerOrganizationRequest) throws OrganizationAlreadyExistsException {
         Organization foundOrganization = organizationRepository.findOrganizationByName(registerOrganizationRequest.getName());
@@ -54,6 +56,9 @@ public class OrganizationServiceImpl implements OrganizationService{
     public void deleteAll() {
         for (Organization organization:organizationRepository.findAll()) {
             List<Cohort> cohortList = cohortService.findCohortByOrganization(organization);
+            for (Cohort cohort:cohortList) {
+                cohort.getCourses().clear();
+            }
             cohortService.deleteCohorts(cohortList);
             organizationRepository.delete(organization);
         }

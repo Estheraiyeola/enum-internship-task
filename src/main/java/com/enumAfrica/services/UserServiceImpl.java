@@ -3,8 +3,6 @@ package com.enumAfrica.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.enumAfrica.data.model.Instructor;
-import com.enumAfrica.data.model.Learner;
 import com.enumAfrica.data.model.Role;
 import com.enumAfrica.data.model.User;
 import com.enumAfrica.data.repository.UserRepository;
@@ -17,8 +15,6 @@ import com.enumAfrica.exception.UserAlreadyExistsException;
 import com.enumAfrica.exception.UserWithThisCredentialsDoesNotExistException;
 import com.enumAfrica.utils.Mapper;
 import com.enumAfrica.utils.SecretKeyGenerator;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -35,7 +31,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final Mapper mapper;
-    private final CohortService cohortService;
     @Override
     public CreatedUserResponse createUser(CreateUserRequest createUserRequest) throws UserAlreadyExistsException {
         User foundUser = userRepository.findUserByEmail(createUserRequest.getEmail());
@@ -63,14 +58,7 @@ public class UserServiceImpl implements UserService {
         throw new UserAlreadyExistsException("User already exists");
     }
 
-    @Override
-    @Transactional
-    public void deleteAll() {
-        for (User user:userRepository.findAll()) {
-            cohortService.deleteUser(user);
-            userRepository.delete(user);
-        }
-    }
+
 
     @Override
     public User findByFirstName(String name) {
@@ -129,6 +117,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long instructorId) {
         return userRepository.findUserById(instructorId);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 
 
