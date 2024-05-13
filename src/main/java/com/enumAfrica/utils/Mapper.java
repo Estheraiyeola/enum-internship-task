@@ -62,6 +62,7 @@ public class Mapper {
         organization.setCac(registerOrganizationRequest.getCac());
         organization.setEmail(registerOrganizationRequest.getEmail());
         organization.setPassword(encodedPassword);
+        organization.setRole(Role.ORGANIZATION);
 
         return organization;
     }

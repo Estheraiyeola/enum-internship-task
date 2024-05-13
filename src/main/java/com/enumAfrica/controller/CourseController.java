@@ -27,7 +27,7 @@ public class CourseController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 CreatedCourseResponse response = courseService.createCourse(createCourseRequest);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }

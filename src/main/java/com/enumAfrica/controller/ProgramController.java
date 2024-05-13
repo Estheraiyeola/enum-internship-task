@@ -32,7 +32,7 @@ public class ProgramController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 CreatedProgramResponse response = programTypeService.createProgram(createProgramRequest);
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
@@ -47,7 +47,7 @@ public class ProgramController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 List<ProgramType> response = programTypeService.getAllProgramType();
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -62,7 +62,7 @@ public class ProgramController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 ProgramType response = programTypeService.getAProgramType(programName);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }

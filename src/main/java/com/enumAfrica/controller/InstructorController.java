@@ -39,7 +39,7 @@ public class InstructorController {
     public ResponseEntity<?> inviteInstructor(@RequestBody InviteInstructorRequest inviteInstructorRequest, @RequestHeader("Authorization") String accessToken){
         String[] token = accessToken.split(" ");
         List<String> decodedToken = userService.verifyToken(token[1]);
-        if (decodedToken.get(1).equals("ADMIN")){
+        if (decodedToken.get(1).equals("ORGANIZATION")){
             InvitedInstructorResponse response = cohortService.inviteInstructorToCohort(inviteInstructorRequest);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -65,7 +65,7 @@ public class InstructorController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 RemovedInstructorResponse response = cohortUserService.removeInstructorFromCohort(removeInstructorRequest);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -79,7 +79,7 @@ public class InstructorController {
     public ResponseEntity<?> getAllInstructorsInAnOrganization(@RequestParam Long organizationId, @RequestHeader("Authorization") String accessToken){
         String[] token = accessToken.split(" ");
         List<String> decodedToken = userService.verifyToken(token[1]);
-        if (decodedToken.get(1).equals("ADMIN")){
+        if (decodedToken.get(1).equals("ORGANIZATION")){
             List<Instructor> response = instructorService.getInstructorsByOrganization(organizationId);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -91,7 +91,7 @@ public class InstructorController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 AssignedCourseToInstructorResponse response = instructorService.assignCourseToCohort(assignCourseToInstructorRequest);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }

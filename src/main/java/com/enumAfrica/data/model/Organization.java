@@ -20,5 +20,6 @@ public class Organization {
     private String email;
     @JsonIgnore
     private String password;
+    private Role role;
 
 }

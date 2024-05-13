@@ -33,7 +33,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 CreatedCohortResponse response = cohortService.createCohort(createCohortRequest);
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
@@ -48,7 +48,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 List<Cohort> response = cohortService.getAllCohorts();
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -63,7 +63,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 Cohort response = cohortService.getCohort(cohortName);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -78,7 +78,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 Organization organization = organizationService.findOrganizationById(organizationId);
                 List<Cohort> response = cohortService.findCohortByOrganization(organization);
                 return new ResponseEntity<>(response, HttpStatus.OK);
@@ -94,7 +94,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 List<Course> response = cohortService.getAllCoursesInA_Cohort(cohortId);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -109,7 +109,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 List<Learner> response = cohortService.getAllLearnersIn_A_Cohort(cohortId);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
@@ -124,7 +124,7 @@ public class CohortController {
         try{
             String[] token = accessToken.split(" ");
             List<String> decodedToken = userService.verifyToken(token[1]);
-            if (decodedToken.get(1).equals("ADMIN")){
+            if (decodedToken.get(1).equals("ORGANIZATION")){
                 List<Instructor> response = cohortService.getAllInstructorsIn_A_Cohort(cohortId);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }

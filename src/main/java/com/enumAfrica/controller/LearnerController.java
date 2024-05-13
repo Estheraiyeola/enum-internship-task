@@ -30,7 +30,7 @@ public class LearnerController {
     public ResponseEntity<?> inviteLearner(@RequestBody InviteLearnerRequest inviteLearnerRequest, @RequestHeader("Authorization") String accessToken){
         String[] token = accessToken.split(" ");
         List<String> decodedToken = userService.verifyToken(token[1]);
-        if (decodedToken.get(1).equals("ADMIN")){
+        if (decodedToken.get(1).equals("ORGANIZATION")){
             InvitedLearnerResponse response = cohortService.inviteLearnerToCohort(inviteLearnerRequest);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -60,7 +60,7 @@ public class LearnerController {
     public ResponseEntity<?> getAllLearnersInAnOrganization(@RequestParam Long organizationId, @RequestHeader("Authorization") String accessToken){
         String[] token = accessToken.split(" ");
         List<String> decodedToken = userService.verifyToken(token[1]);
-        if (decodedToken.get(1).equals("ADMIN")){
+        if (decodedToken.get(1).equals("ORGANIZATION")){
             List<Learner> response = learnerService.getLearnersByOrganization(organizationId);
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

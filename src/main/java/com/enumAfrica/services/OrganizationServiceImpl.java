@@ -82,6 +82,7 @@ public class OrganizationServiceImpl implements OrganizationService{
                         .withClaim("id", foundOrganization.getId())
                         .withClaim("firstName", foundOrganization.getName())
                         .withClaim("email", foundOrganization.getEmail())
+                        .withClaim("role", foundOrganization.getRole().toString())
                         .withIssuedAt(Date.from(currentTime.atZone(ZoneId.systemDefault()).toInstant()))
                         .withExpiresAt(expiryDate)
                         .sign(algorithm);
