@@ -5,9 +5,12 @@ import com.enumAfrica.data.repository.CourseRepository;
 import com.enumAfrica.dto.request.CreateCourseRequest;
 import com.enumAfrica.dto.response.CreatedCourseResponse;
 import com.enumAfrica.exception.CourseAlreadyExistsException;
+import com.enumAfrica.exception.CourseNotFoundException;
 import com.enumAfrica.utils.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -32,6 +35,21 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public void deleteAll() {
         courseRepository.deleteAll();
+    }
+
+    @Override
+    public Course findById(Long courseId) throws CourseNotFoundException {
+        return courseRepository.findById(courseId).orElseThrow(() -> new CourseNotFoundException("Course not found"));
+    }
+
+    @Override
+    public void save(Course course) {
+        courseRepository.save(course);
+    }
+
+    @Override
+    public void deleteCourses(List<Course> courses) {
+        courseRepository.deleteAll(courses);
     }
 
 

@@ -3,6 +3,9 @@ package com.enumAfrica.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.enumAfrica.data.model.Instructor;
+import com.enumAfrica.data.model.Learner;
+import com.enumAfrica.data.model.Role;
 import com.enumAfrica.data.model.User;
 import com.enumAfrica.data.repository.UserRepository;
 import com.enumAfrica.dto.request.AuthenticateUserRequest;
@@ -15,6 +18,7 @@ import com.enumAfrica.exception.UserWithThisCredentialsDoesNotExistException;
 import com.enumAfrica.utils.Mapper;
 import com.enumAfrica.utils.SecretKeyGenerator;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -31,11 +35,24 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final Mapper mapper;
+    private final CohortService cohortService;
     @Override
     public CreatedUserResponse createUser(CreateUserRequest createUserRequest) throws UserAlreadyExistsException {
         User foundUser = userRepository.findUserByEmail(createUserRequest.getEmail());
         if (foundUser == null){
-            User newUser = mapper.map(createUserRequest);
+            User newUser = null;
+            if (createUserRequest.getRole()==Role.INSTRUCTOR){
+                newUser = mapper.mapInstructor(createUserRequest);
+            }
+            else if (createUserRequest.getRole()==Role.LEARNER){
+                newUser = mapper.mapLearner(createUserRequest);
+            }
+            else if (createUserRequest.getRole()==Role.ADMIN){
+                newUser = mapper.mapAdmin(createUserRequest);
+            }
+            else {
+                throw new IllegalArgumentException("Invalid role specified");
+            }
             User savedUser = userRepository.save(newUser);
 
             CreatedUserResponse createdUserResponse = new CreatedUserResponse();
@@ -47,8 +64,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteAll() {
-        userRepository.deleteAll();
+        for (User user:userRepository.findAll()) {
+            cohortService.deleteUser(user);
+            userRepository.delete(user);
+        }
     }
 
     @Override
@@ -103,6 +124,11 @@ public class UserServiceImpl implements UserService {
         storage.add(id);
         storage.add(role);
         return storage;
+    }
+
+    @Override
+    public User findById(Long instructorId) {
+        return userRepository.findUserById(instructorId);
     }
 
 

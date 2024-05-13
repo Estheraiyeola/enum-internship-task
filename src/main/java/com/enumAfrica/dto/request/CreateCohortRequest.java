@@ -1,5 +1,6 @@
 package com.enumAfrica.dto.request;
 
+import com.enumAfrica.data.model.Organization;
 import com.enumAfrica.data.model.ProgramType;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,4 +18,5 @@ public class CreateCohortRequest {
     private String avatar;
     private String startDate;
     private String endDate;
+    private Organization organization;
 }

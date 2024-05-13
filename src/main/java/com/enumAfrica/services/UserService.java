@@ -23,4 +23,6 @@ public interface UserService {
     AuthenticatedUserResponse authenticateUser(AuthenticateUserRequest authenticateUserRequest) throws UserWithThisCredentialsDoesNotExistException;
 
     List<String> verifyToken(String accessToken) throws JWTDecodeException;
+
+    User findById(Long instructorId);
 }

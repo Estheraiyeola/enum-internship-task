@@ -8,6 +8,9 @@ public class EnumApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EnumApplication.class, args);
+
 	}
+
+
 
 }
