@@ -42,8 +42,8 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public Course findCourseByNameAndCohort(String name, Cohort cohort) {
-        return courseRepository.findCourseByNameAndCohort(name, cohort);
+    public Course findCourseByNameAndCohort(String name, Long cohortId) {
+        return courseRepository.findCourseByNameAndCohortId(name, cohortId);
     }
 
     @Override

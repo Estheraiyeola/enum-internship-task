@@ -12,7 +12,5 @@ public class Course {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToOne
-    @JoinColumn(name = "cohort_id")
-    private Cohort cohort;
+    private Long cohortId;
 }

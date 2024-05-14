@@ -33,7 +33,6 @@ public class OrganizationServiceImpl implements OrganizationService{
     private final Mapper mapper;
     private final OrganizationRepository organizationRepository;
     private final CohortService cohortService;
-    private final CourseService courseService;
     @Override
     public RegisteredOrganizationResponse registerOrganization(RegisterOrganizationRequest registerOrganizationRequest) throws OrganizationAlreadyExistsException {
         Organization foundOrganization = organizationRepository.findOrganizationByName(registerOrganizationRequest.getName());

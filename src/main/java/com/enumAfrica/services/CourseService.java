@@ -20,7 +20,7 @@ public interface CourseService {
 
     void deleteCourses(List<Course> courses);
 
-    Course findCourseByNameAndCohort(String name, Cohort cohort);
+    Course findCourseByNameAndCohort(String name, Long cohortId);
 
     List<Course> findAll();
 }

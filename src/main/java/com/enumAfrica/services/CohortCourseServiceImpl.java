@@ -25,12 +25,10 @@ public class CohortCourseServiceImpl implements CohortCourseService{
     private final Mapper mapper;
     @Override
     public CreatedCourseResponse createCourse(CreateCourseRequest createCourseRequest) throws CourseAlreadyExistsException, CohortNotFoundException {
-        Cohort cohort = cohortService.findById(createCourseRequest.getCohortId());
-        Course foundCourse = courseService.findCourseByNameAndCohort(createCourseRequest.getName(), cohort);
+        Course foundCourse = courseService.findCourseByNameAndCohort(createCourseRequest.getName(), createCourseRequest.getCohortId());
         if (foundCourse == null){
             Course newCourse = mapper.map(createCourseRequest);
-            Cohort foundCohort = findById(createCourseRequest.getCohortId());
-            newCourse.setCohort(foundCohort);
+            newCourse.setCohortId(createCourseRequest.getCohortId());
             Course savedCourse = courseService.save(newCourse);
 
             CreatedCourseResponse response = new CreatedCourseResponse();
@@ -63,7 +61,7 @@ public class CohortCourseServiceImpl implements CohortCourseService{
             courses.add(course);
             cohort.setCourses(courses);
             cohortService.save(cohort);
-            course.setCohort(cohort);
+            course.setCohortId(cohort.getId());
             courseService.save(course);
 
             addedCourseToCohortResponse.setCourse(course);
