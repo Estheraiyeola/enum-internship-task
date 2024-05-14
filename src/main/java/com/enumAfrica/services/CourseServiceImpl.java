@@ -1,14 +1,8 @@
 package com.enumAfrica.services;
 
-import com.enumAfrica.data.model.Cohort;
 import com.enumAfrica.data.model.Course;
 import com.enumAfrica.data.repository.CourseRepository;
-import com.enumAfrica.dto.request.CreateCourseRequest;
-import com.enumAfrica.dto.response.CreatedCourseResponse;
-import com.enumAfrica.exception.CohortNotFoundException;
-import com.enumAfrica.exception.CourseAlreadyExistsException;
 import com.enumAfrica.exception.CourseNotFoundException;
-import com.enumAfrica.utils.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +43,11 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public List<Course> findAll() {
         return courseRepository.findAll();
+    }
+
+    @Override
+    public Course findCourseByName(String name) {
+        return courseRepository.findCourseByName(name);
     }
 
 

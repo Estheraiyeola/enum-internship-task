@@ -23,4 +23,6 @@ public interface CourseService {
     Course findCourseByNameAndCohort(String name, Long cohortId);
 
     List<Course> findAll();
+
+    Course findCourseByName(String name);
 }

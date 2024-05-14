@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
     Course findCourseByNameAndCohortId (String name, Long cohortId);
+    Course findCourseByName(String name);
 }
