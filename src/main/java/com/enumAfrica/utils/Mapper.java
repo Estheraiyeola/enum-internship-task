@@ -6,6 +6,11 @@ import com.enumAfrica.dto.request.CreateCourseRequest;
 import com.enumAfrica.dto.request.CreateUserRequest;
 import com.enumAfrica.dto.request.RegisterOrganizationRequest;
 import com.enumAfrica.dto.response.CreatedCohortResponse;
+import com.enumAfrica.exception.CohortNotFoundException;
+import com.enumAfrica.services.CohortCourseService;
+import com.enumAfrica.services.CohortService;
+import com.enumAfrica.services.CourseService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -47,7 +52,7 @@ public class Mapper {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(request.getPassword());
     }
-    public Course map(CreateCourseRequest createCourseRequest) {
+    public Course map(CreateCourseRequest createCourseRequest) throws CohortNotFoundException {
         Course course = new Course();
         course.setName(createCourseRequest.getName());
         return course;

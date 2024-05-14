@@ -1,9 +1,11 @@
 package com.enumAfrica.services;
 
+import com.enumAfrica.data.model.Cohort;
 import com.enumAfrica.data.model.Course;
 import com.enumAfrica.data.repository.CourseRepository;
 import com.enumAfrica.dto.request.CreateCourseRequest;
 import com.enumAfrica.dto.response.CreatedCourseResponse;
+import com.enumAfrica.exception.CohortNotFoundException;
 import com.enumAfrica.exception.CourseAlreadyExistsException;
 import com.enumAfrica.exception.CourseNotFoundException;
 import com.enumAfrica.utils.Mapper;
@@ -16,21 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CourseServiceImpl implements CourseService{
     private final CourseRepository courseRepository;
-    private final Mapper mapper;
-    @Override
-    public CreatedCourseResponse createCourse(CreateCourseRequest createCourseRequest) throws CourseAlreadyExistsException {
-        Course foundCourse = courseRepository.findCourseByName(createCourseRequest.getName());
-        if (foundCourse == null){
-            Course newCourse = mapper.map(createCourseRequest);
-            Course savedCourse = courseRepository.save(newCourse);
 
-            CreatedCourseResponse response = new CreatedCourseResponse();
-            response.setCourse(savedCourse);
-            response.setMessage("Course Created Successfully");
-            return response;
-        }
-        throw new CourseAlreadyExistsException("Course Already Exists");
-    }
 
     @Override
     public void deleteAll() {
@@ -43,13 +31,24 @@ public class CourseServiceImpl implements CourseService{
     }
 
     @Override
-    public void save(Course course) {
+    public Course save(Course course) {
         courseRepository.save(course);
+        return course;
     }
 
     @Override
     public void deleteCourses(List<Course> courses) {
         courseRepository.deleteAll(courses);
+    }
+
+    @Override
+    public Course findCourseByNameAndCohort(String name, Cohort cohort) {
+        return courseRepository.findCourseByNameAndCohort(name, cohort);
+    }
+
+    @Override
+    public List<Course> findAll() {
+        return courseRepository.findAll();
     }
 
 

@@ -23,7 +23,7 @@ public class CohortServiceImpl implements CohortService{
     private final ProgramTypeService programTypeService;
     private final Mapper mapper;
     private final MailService mailService;
-    private final CourseService courseService;
+//    private final CourseService courseService;
 
     @Override
     public CreatedCohortResponse createCohort(CreateCohortRequest createCohortRequest) throws CohortAlreadyExistsException, IOException, ProgramTypeDoesNotExistException {
@@ -49,14 +49,10 @@ public class CohortServiceImpl implements CohortService{
     }
 
     @Override
-    @Transactional
     public void deleteAll() {
-        for (Cohort cohort:cohortRepository.findAll()) {
-            List<Course> courses = cohort.getCourses();
-            courseService.deleteCourses(courses);
-            cohortRepository.delete(cohort);
-        }
+
     }
+
 
     @Override
     public List<Cohort> getAllCohorts() {
@@ -127,28 +123,7 @@ public class CohortServiceImpl implements CohortService{
         cohortRepository.save(cohort);
     }
 
-    @Override
-    @Transactional
-    public AddedCourseToCohortResponse addCourse(AddCourseToCohortRequest addCourseToCohortRequest) throws CohortNotFoundException, CourseNotFoundException {
-        Cohort cohort = cohortRepository.findById(addCourseToCohortRequest.getCohortId()).orElseThrow(()-> new CohortNotFoundException("Cohort not found"));
-        Course course = courseService.findById(addCourseToCohortRequest.getCourseId());
-        AddedCourseToCohortResponse addedCourseToCohortResponse = new AddedCourseToCohortResponse();
 
-        if (cohort != null){
-            List<Course> courses = cohort.getCourses();
-            courses.add(course);
-            cohort.setCourses(courses);
-            cohortRepository.save(cohort);
-            course.setCohort(cohort);
-            courseService.save(course);
-
-            addedCourseToCohortResponse.setCourse(course);
-            addedCourseToCohortResponse.setMessage("Course added successfully");
-            return addedCourseToCohortResponse;
-        }
-        addedCourseToCohortResponse.setMessage("Course not added");
-        return addedCourseToCohortResponse;
-    }
 
     @Override
     public List<Cohort> findCohortByOrganization(Organization organization) {
@@ -230,7 +205,10 @@ public class CohortServiceImpl implements CohortService{
         return instructors;
     }
 
-
+    @Override
+    public void delete(Cohort cohort) {
+        cohortRepository.delete(cohort);
+    }
 
 
 }

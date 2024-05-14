@@ -29,8 +29,6 @@ public interface CohortService {
 
     void save(Cohort cohort);
 
-    AddedCourseToCohortResponse addCourse(AddCourseToCohortRequest addCourseToCohortRequest) throws CohortNotFoundException, CourseNotFoundException;
-
     List<Cohort> findCohortByOrganization(Organization organization);
 
     void deleteCohorts(List<Cohort> cohortList);
@@ -45,4 +43,5 @@ public interface CohortService {
 
     List<Instructor> getAllInstructorsIn_A_Cohort(Long cohortId) throws CohortNotFoundException;
 
+    void delete(Cohort cohort);
 }

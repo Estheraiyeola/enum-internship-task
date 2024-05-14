@@ -26,13 +26,15 @@ public class InstructorServiceTest {
     @Autowired
     private OrganizationService organizationService;
     @Autowired
-    private CourseService courseService;
+    private CohortCourseService cohortCourseService;
     @Autowired
     private ProgramTypeService programTypeService;
     @Autowired
     private CohortService cohortService;
     @Autowired
     private CohortUserService cohortUserService;
+    @Autowired
+    private CourseService courseService;
 
     @BeforeEach
     public void setInstructorService(){
@@ -88,7 +90,7 @@ public class InstructorServiceTest {
 
         CreateCourseRequest createCourseRequest = new CreateCourseRequest();
         createCourseRequest.setName("Design Thinking");
-        CreatedCourseResponse createdCourseResponse = courseService.createCourse(createCourseRequest);
+        CreatedCourseResponse createdCourseResponse = cohortCourseService.createCourse(createCourseRequest);
         assertThat(createdCourseResponse.getCourse().getName(), is("Design Thinking"));
 
 
@@ -96,7 +98,7 @@ public class InstructorServiceTest {
         addCourseToCohortRequest.setCourseId(createdCourseResponse.getCourse().getId());
         addCourseToCohortRequest.setCohortId(createdCohortResponse.getCohort().getId());
 
-        AddedCourseToCohortResponse addedCourseToCohortResponse = cohortService.addCourse(addCourseToCohortRequest);
+        AddedCourseToCohortResponse addedCourseToCohortResponse = cohortCourseService.addCourse(addCourseToCohortRequest);
         assertThat(addedCourseToCohortResponse.getMessage(), is("Course added successfully"));
 
         Recipient recepient = new Recipient();

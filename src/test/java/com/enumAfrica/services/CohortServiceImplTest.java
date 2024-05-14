@@ -30,6 +30,8 @@ public class CohortServiceImplTest {
     private OrganizationService organizationService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private CohortCourseService cohortCourseService;
 
     @BeforeEach
     public void setCohortService(){
@@ -387,7 +389,7 @@ public class CohortServiceImplTest {
 
         CreateCourseRequest createCourseRequest = new CreateCourseRequest();
         createCourseRequest.setName("Design Thinking");
-        CreatedCourseResponse createdCourseResponse = courseService.createCourse(createCourseRequest);
+        CreatedCourseResponse createdCourseResponse = cohortCourseService.createCourse(createCourseRequest);
         assertThat(createdCourseResponse.getCourse().getName(), is("Design Thinking"));
 
 
@@ -395,7 +397,7 @@ public class CohortServiceImplTest {
         addCourseToCohortRequest.setCourseId(createdCourseResponse.getCourse().getId());
         addCourseToCohortRequest.setCohortId(response.getCohort().getId());
 
-        AddedCourseToCohortResponse addedCourseToCohortResponse = cohortService.addCourse(addCourseToCohortRequest);
+        AddedCourseToCohortResponse addedCourseToCohortResponse = cohortCourseService.addCourse(addCourseToCohortRequest);
         assertThat(addedCourseToCohortResponse.getMessage(), is("Course added successfully"));
 
 
