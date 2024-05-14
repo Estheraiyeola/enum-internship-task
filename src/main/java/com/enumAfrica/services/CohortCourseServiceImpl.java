@@ -33,6 +33,7 @@ public class CohortCourseServiceImpl implements CohortCourseService{
 
             Cohort cohort = cohortService.findById(createCourseRequest.getCohortId());
             cohort.getCourses().add(savedCourse);
+            cohortService.save(cohort);
 
             CreatedCourseResponse response = new CreatedCourseResponse();
             response.setCourse(savedCourse);
